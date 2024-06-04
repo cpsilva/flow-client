@@ -1,0 +1,30 @@
+@use '../../../variables' as *;
+
+.buttons-custom {
+    display: flex;
+    margin: 8px;
+}
+
+.button-custom {
+    display: flex;
+    margin-right: 16px;
+}
+
+.dialog-container {
+	display: flex;
+    width: 720px;
+}
+
+$custom-button-theme: button-theme(
+    $foreground: #fdfdfd,
+    $hover-foreground: #fdfdfd,
+    $background: #345779,
+    $hover-background: #2e4d6b,
+    $focus-foreground: #fdfdfd,
+    $focus-background: #2e4d6b,
+    $disabled-foreground: #bbb
+);
+
+:host ::ng-deep {
+	@include css-vars($custom-button-theme);
+}

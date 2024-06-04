@@ -1,0 +1,64 @@
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h3>Processos</h3>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">Processos</li>
+                </ol>
+            </div>
+        </div>
+        <div class="button-custom">
+            <button igxButton="contained" igxRipple (click)="form.open()">Novo processo</button>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+    <div class="container-fluid">
+        <app-arvore-processos [data]="arvoreProcessos" />
+    </div>
+</section>
+<igx-dialog #form [closeOnOutsideSelect]="true">
+    <igx-dialog-title>
+        <div class="dialog-container">
+            <div class="dialog-title">Adicionar novo processo</div>
+        </div>
+    </igx-dialog-title>
+
+    <form class="novoProcessoForm">
+        <igx-input-group>
+            <label igxLabel for="nomeProcesso">Nome do processo</label>
+            <input igxInput id="nomeProcesso" type="text" />
+        </igx-input-group>
+        <igx-select>
+            <label igxLabel>Possui processo pai?</label>
+            <igx-suffix *ngIf="selected">
+                <igx-icon (click)="limparSelecao($event)">clear</igx-icon>
+            </igx-suffix>
+            <igx-select-item *ngFor="let item of arvoreProcessos" [value]="item">
+                {{item.Name}}
+            </igx-select-item>
+        </igx-select>
+        <br />
+        <div class="button-custom" fxLayout="row" fxLayoutAlign="space-between center">
+            <span igxButton="contained" igxButtonColor="white" igxButtonBackground="#345779" igxRipple="white" (click)="anexarArquivo()">
+                <igx-prefix>
+                    <igx-icon fontSet="material" [style.color]="'white'">upload</igx-icon>
+                </igx-prefix>
+                Anexar arquivo
+            </span>
+            <span *ngIf="uploadRealizado">Upload realizado com sucesso!</span>
+        </div>
+    </form>
+
+    <div class="buttons-custom" igxDialogActions>
+        <button igxButton="oulined" (click)="form.close()">Cancelar</button>
+        <span style="margin-left: 1%;" igxButton="contained" igxButtonColor="white" igxButtonBackground="#345779" igxRipple="white" (click)="form.close()">
+            Adicionar
+        </span>
+    </div>
+</igx-dialog>

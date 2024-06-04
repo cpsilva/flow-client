@@ -1,0 +1,105 @@
+<div>
+    <igx-tree #tree class="tree-root" selection="None" [singleBranchExpand]="true">
+        <igx-tree-node *ngFor="let root of data" [expanded]="false" [data]="root">
+            <ng-container *ngTemplateOutlet="nodeTemplate; context: { $implicit: root }"></ng-container>
+            <igx-tree-node #subfolder *ngFor="let node1 of root.Children" [data]="node1">
+                <ng-container *ngTemplateOutlet="nodeTemplate; context: { $implicit: node1 }"></ng-container>
+                <igx-tree-node *ngFor="let node2 of node1.Children" [data]="node2">
+                    <ng-container *ngTemplateOutlet="nodeTemplate; context: { $implicit: node2 }"></ng-container>
+                    <igx-tree-node *ngFor="let node3 of node2.Children" [data]="node3">
+                        <ng-container *ngTemplateOutlet="nodeTemplate; context: { $implicit: node3 }"></ng-container>
+                    </igx-tree-node>
+                </igx-tree-node>
+            </igx-tree-node>
+        </igx-tree-node>
+    </igx-tree>
+    <ng-template #nodeTemplate let-data>
+        <div fxLayout="row" fxLayoutAlign="space-between">
+            <div class="node">
+                <igx-icon class="tree-node-icon" [name]="data.Icon"></igx-icon>
+                <span class="node-title">{{ data.Name }}</span>
+            </div>
+            <div class="actions" fxLayoutAlign="space-between" *ngIf="data.Id === selectedNodeId">
+                <button igxIconButton="outlined" igxRipple class="large">
+                    <igx-icon fontSet="material" [igxTooltipTarget]="addProcessoTooltip">check</igx-icon>
+                    <div class="addProcessoTooltip" #addProcessoTooltip="tooltip" igxTooltip>
+                        <div class="addProcessoTooltipContent">
+                           <span>Adicionar sub-processo</span>
+                        </div>
+                    </div>
+                </button>
+                <button igxIconButton="outlined" igxRipple class="large" (click)="editform.open()">
+                    <igx-icon fontSet="material" [igxTooltipTarget]="editProcessoTooltip">edit</igx-icon>
+                    <div class="editProcessoTooltip" #editProcessoTooltip="tooltip" igxTooltip>
+                        <div class="editProcessoTooltipContent">
+                           <span>Editar</span>
+                        </div>
+                    </div>
+                </button>
+                <button igxIconButton="outlined" igxRipple class="large" (click)="abrirMapeamento(data.Id)">
+                    <igx-icon fontSet="material" [igxTooltipTarget]="mapProcessoTooltip">open_with</igx-icon>
+                    <div class="mapProcessoTooltip" #mapProcessoTooltip="tooltip" igxTooltip>
+                        <div class="mapProcessoTooltipContent">
+                           <span>Mapear processo</span>
+                        </div>
+                    </div>
+                </button>
+                <button igxIconButton="outlined" igxRipple class="large" (click)="abrirRemoverDialog(data)">
+                    <igx-icon fontSet="material" [igxTooltipTarget]="removerProcessoTooltip">delete</igx-icon>
+                    <div class="removerProcessoTooltip" #removerProcessoTooltip="tooltip" igxTooltip>
+                        <div class="removerProcessoTooltipContent">
+                           <span>Remover</span>
+                        </div>
+                    </div>
+                </button>
+            </div>
+        </div>
+    </ng-template>
+</div>
+<igx-dialog #editform [closeOnOutsideSelect]="true">
+    <igx-dialog-title>
+        <div class="dialog-container">
+            <div class="dialog-title">Editar processo</div>
+        </div>
+    </igx-dialog-title>
+
+    <form class="editProcessoForm">
+        <igx-input-group>
+            <label igxLabel for="nomeProcesso">Nome do processo</label>
+            <input igxInput id="nomeProcesso" type="text" />
+        </igx-input-group>
+        <igx-select>
+            <label igxLabel>Possui processo pai?</label>
+            <igx-suffix *ngIf="selected">
+                <igx-icon (click)="limparSelecao($event)">clear</igx-icon>
+            </igx-suffix>
+            <igx-select-item *ngFor="let item of data" [value]="item">
+                {{item.Name}}
+            </igx-select-item>
+        </igx-select>
+        <br />
+        <div class="button-custom" fxLayout="row" fxLayoutAlign="space-between center">
+            <span igxButton="contained" igxButtonColor="white" igxButtonBackground="#345779" igxRipple="white" (click)="anexarArquivo()">
+                <igx-prefix>
+                    <igx-icon fontSet="material" [style.color]="'white'">upload</igx-icon>
+                </igx-prefix>
+                Anexar arquivo
+            </span>
+            <span *ngIf="uploadRealizado">Upload realizado com sucesso!</span>
+        </div>
+    </form>
+
+    <div class="buttons-custom" igxDialogActions>
+        <button igxButton="oulined" (click)="editform.close()">Cancelar</button>
+        <span style="margin-left: 1%;" igxButton="contained" igxButtonColor="white" igxButtonBackground="#345779" igxRipple="white" (click)="editform.close()">
+            Atualizar
+        </span>
+    </div>
+</igx-dialog>
+<igx-dialog #removerDialog title="Confirmação"
+    leftButtonLabel="Cancel"
+    (leftButtonSelect)="removerDialog.close()"
+    rightButtonLabel="OK"
+    (rightButtonSelect)="onDialogOKSelected($event)"
+    message={{removeMessage}}>
+</igx-dialog>

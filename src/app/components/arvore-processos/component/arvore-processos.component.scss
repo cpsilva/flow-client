@@ -1,0 +1,64 @@
+@use '../../../../variables' as *;
+
+.large {
+    --ig-size: var(--ig-size-large);
+}
+
+[igxIconButton="outlined"] {
+    --foreground: #011627;
+    --background: #FEFEFE;
+    --border-color: #011627;
+    --hover-foreground:  #011627dc;
+    --hover-background: #fdfdfd;
+    --focus-foreground: #011627dc;
+    --focus-background: #fdfdfd;
+    --focus-border-color:  #0116276c;
+    --active-foreground: #011627dc;
+    --active-background: #fdfdfd;
+}
+
+$custom-tree-theme:tree-theme(
+    $background-selected: #fdfdfd,
+    $background-active: #2e4d6b,
+    $background-active-selected: #4b7daf,
+    $border-color:#2e4d6b,
+);
+
+.dialog-container {
+	display: flex;
+    width: 720px;
+}
+
+$my-dialog-theme: dialog-theme(
+	$background: #fdfdfd,
+	$title-color: #0116276c,
+	$message-color: #0116276c,
+	$border-radius: .3,
+);
+
+$custom-button-theme: button-theme(
+    $foreground: #fdfdfd,
+    $hover-foreground: #fdfdfd,
+    $background: #345779,
+    $hover-background: #2e4d6b,
+    $focus-foreground: #fdfdfd,
+    $focus-background: #2e4d6b,
+    $disabled-foreground: #bbb
+);
+
+:host {
+	display: block;
+	padding: 16px;
+
+	::ng-deep {
+		@include css-vars($my-dialog-theme);
+
+		.dialog-container {
+			@include css-vars($custom-button-theme);
+		}
+	}
+}
+
+:host {
+    @include css-vars($custom-tree-theme);
+}
