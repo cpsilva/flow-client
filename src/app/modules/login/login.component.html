@@ -1,23 +1,17 @@
 <div class="card card-outline card-primary">
-    <div class="card-header text-center">
-        <a [routerLink]="['/']" class="h1"><pf-image
-            src="assets/img/logo.png"
-            alt="AdminLTE Logo"
-            class="brand-image"
-            height="100"
-            width="100"
-            rounded="true"
-            style="opacity: 0.8"
-        ></pf-image>
-        <b>Flow</b>Minder
-    </a>
+    <div class="card-header text-center" fxLayout="row" fxLayoutAlign="center center">
+        <a [routerLink]="['/']" class="h1">
+            <pf-image src="assets/img/logo-login.png" alt="Flow Logo" class="brand-image" height="80" width="80"
+                style="opacity: 0.8; vertical-align: middle;"></pf-image>
+            <b>Flow</b>Minder
+        </a>
     </div>
     <div class="card-body">
-        <p class="login-box-msg">Entre com a suas credenciais para iniciar a sua sessão</p>
+        <p class="login-box-msg">Enter your credentials to start the session</p>
 
         <form [formGroup]="loginForm" (ngSubmit)="loginByAuth()">
             <div class="input-group mb-3">
-                <input formControlName="username" type="text" class="form-control" placeholder="Usuário" />
+                <input formControlName="username" type="text" class="form-control" placeholder="Username" />
                 <div class="input-group-append">
                     <div class="input-group-text">
                         <span class="fas fa-envelope"></span>
@@ -25,7 +19,7 @@
                 </div>
             </div>
             <div class="input-group mb-3">
-                <input formControlName="password" type="password" class="form-control" placeholder="Senha" />
+                <input formControlName="password" type="password" class="form-control" placeholder="Password" />
                 <div class="input-group-append">
                     <div class="input-group-text">
                         <span class="fas fa-lock"></span>
@@ -35,7 +29,7 @@
             <div class="row">
                 <div class="col-5">
                     <pf-button [variant]="'primary'" [loading]="isAuthLoading" (click)="loginByAuth()">
-                        Entrar
+                        Enter
                     </pf-button>
                 </div>
             </div>

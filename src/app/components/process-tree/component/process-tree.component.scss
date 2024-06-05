@@ -50,6 +50,8 @@ $custom-button-theme: button-theme(
 	display: block;
 	padding: 16px;
 
+    @include css-vars($custom-tree-theme);
+
 	::ng-deep {
 		@include css-vars($my-dialog-theme);
 
@@ -57,8 +59,4 @@ $custom-button-theme: button-theme(
 			@include css-vars($custom-button-theme);
 		}
 	}
-}
-
-:host {
-    @include css-vars($custom-tree-theme);
 }
