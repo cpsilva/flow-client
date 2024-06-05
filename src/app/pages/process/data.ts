@@ -51,27 +51,5 @@ export const DATA: any[] = [
                 Name: 'Externos' 
             }
         ]
-    },
-    {
-        Id: 3,
-        Name: 'Comunicação de resultados'
-    },
-    {
-        Id: 4,
-        Name: 'Avaliação de performance',
-        Children: [
-            { 
-                Id: 10,
-                Name: 'Gerentes' 
-            },
-            { 
-                Id: 11,
-                Name: 'Coordenadores' 
-            },
-            { 
-                Id: 12,
-                Name: 'Lideres tecnicos' 
-            }
-        ]
     }
 ];

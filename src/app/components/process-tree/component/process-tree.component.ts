@@ -3,19 +3,19 @@ import { Router } from '@angular/router';
 import { IgxDialogComponent, IgxSelectComponent, IgxTreeComponent, IgxTreeNode, IgxTreeNodeComponent, IgxTreeSearchResolver } from 'igniteui-angular';
 
 @Component({
-    selector: 'app-arvore-processos',
-    templateUrl: './arvore-processos.component.html',
-    styleUrls: ['./arvore-processos.component.scss'],
+    selector: 'app-process-tree',
+    templateUrl: './process-tree.component.html',
+    styleUrls: ['./process-tree.component.scss'],
 })
-export class ArvoreProcessosComponent implements AfterViewInit {
+export class ProcessTreeComponent implements AfterViewInit {
     @Input() data: any = [];
     public selected = '';
     public removeMessage = '';
-    public uploadRealizado = false;
+    public isUploadCompleted = false;
     public selectedNodeId: number = 0;
 
-    @ViewChild('removerDialog', { read: IgxDialogComponent, static: true })
-    public removerDialog: IgxDialogComponent;
+    @ViewChild('removeDialog', { read: IgxDialogComponent, static: true })
+    public removeDialog: IgxDialogComponent;
 
     @ViewChild('tree', { read: IgxTreeComponent })
     public tree: IgxTreeComponent;
@@ -33,26 +33,25 @@ export class ArvoreProcessosComponent implements AfterViewInit {
         });
     }
 
-    public abrirMapeamento(mapeamentoProcessoId: number) {
-        this.router.navigate([`/mapeamento-processo/${mapeamentoProcessoId}`]);
+    public openProcessMap(processMapId: number) {
+        this.router.navigate([`/process-map/${processMapId}`]);
     }
 
-    public abrirRemoverDialog(item) {
-        this.removeMessage = `Deseja remover ${item.Name}?`;
-        this.removerDialog.open();
+    public showRemoveDialog(item) {
+        this.removeMessage = `Are you sure you want to remove ${item.Name}?`;
+        this.removeDialog.open();
     }
 
     public onDialogOKSelected(event) {
         event.dialog.close();
     }
 
-    public limparSelecao(event: MouseEvent) {
+    public cleanSelecion(event: MouseEvent) {
         this.selected = '';
         event.stopPropagation();
     }
 
-    public anexarArquivo() {
-        this.uploadRealizado = true;
-        console.log('upload feito')
+    public uploadFile() {
+        this.isUploadCompleted = true;
     }
 }

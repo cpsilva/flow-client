@@ -38,8 +38,8 @@ export const MENU = [
         path: ['/']
     },
     {
-        name: 'Processos',
+        name: 'Processes',
         iconClasses: 'fas fa-sitemap',
-        path: ['/processo']
+        path: ['/process']
     }
 ];

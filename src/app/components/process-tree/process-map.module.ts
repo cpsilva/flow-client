@@ -3,13 +3,13 @@ import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { IgxButtonModule, IgxDialogModule, IgxIconModule, IgxInputGroupModule, IgxRippleModule, IgxSelectModule, IgxTooltipDirective, IgxTooltipModule, IgxTooltipTargetDirective, IgxTreeModule } from "igniteui-angular";
-import { ArvoreProcessosComponent } from "./component/arvore-processos.component";
+import { ProcessTreeComponent } from "./component/process-tree.component";
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { ReactiveFormsModule } from "@angular/forms";
 
 @NgModule({
     declarations: [
-      ArvoreProcessosComponent,
+      ProcessTreeComponent,
     ],
     imports: [
       CommonModule,
@@ -29,8 +29,8 @@ import { ReactiveFormsModule } from "@angular/forms";
     providers: [
     ],
     exports:[
-        ArvoreProcessosComponent
+        ProcessTreeComponent
     ]
   })
-  export class ArvoreProcessosModule {
+  export class ProcessTreeModule {
   }

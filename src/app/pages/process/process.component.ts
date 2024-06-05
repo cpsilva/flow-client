@@ -3,18 +3,18 @@ import { DATA } from './data';
 import { IgxSelectComponent } from 'igniteui-angular';
 
 @Component({
-    selector: 'app-processo',
-    templateUrl: './processo.component.html',
-    styleUrls: ['./processo.component.scss'],
+    selector: 'app-process',
+    templateUrl: './process.component.html',
+    styleUrls: ['./process.component.scss'],
 })
 
-export class ProcessoComponent implements OnInit {
+export class ProcessComponent implements OnInit {
     public localData: any[];
-    public arvoreProcessos = DATA;
+    public processTree = DATA;
     @ViewChild(IgxSelectComponent, { static: true })
     public igxSelect: IgxSelectComponent;
     public selected = '';
-    public uploadRealizado = false;
+    public isUploadCompleted = false;
 
     constructor() {
         
@@ -24,17 +24,17 @@ export class ProcessoComponent implements OnInit {
        
     }
 
-    public adicionarNovoProcesso(event) {
+    public addNewProcess(event) {
+        this.processTree.push(event);
         event.dialog.close();
     }
 
-    public limparSelecao(event: MouseEvent) {
+    public cleanSelection(event: MouseEvent) {
         this.selected = '';
         event.stopPropagation();
     }
 
-    public anexarArquivo() {
-        this.uploadRealizado = true;
-        console.log('upload feito')
+    public uploadFile() {
+        this.isUploadCompleted = true;
     }
 }

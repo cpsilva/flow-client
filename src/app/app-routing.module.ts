@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { MainComponent } from '@modules/main/main.component';
-import { MapeamentoProcessoComponent } from '@pages/mapeamento-processo/mapeamento-processo.component';
 import { LoginComponent } from '@modules/login/login.component';
 import { ProfileComponent } from '@pages/profile/profile.component';
 import { HomeComponent } from '@pages/home/home.component';
 import { AuthGuard } from '@guards/auth.guard';
 import { NonAuthGuard } from '@guards/non-auth.guard';
-import { ProcessoComponent } from '@pages/processo/processo.component';
+import { ProcessComponent } from '@pages/process/process.component';
+import { ProcessMapComponent } from '@pages/process-map/process-map.component';
 
 const routes: Routes = [
     {
@@ -21,12 +21,12 @@ const routes: Routes = [
                 component: ProfileComponent
             },
             {
-                path: 'processo',
-                component: ProcessoComponent
+                path: 'process',
+                component: ProcessComponent
             },
             {
-                path: 'mapeamento-processo/:id',
-                component: MapeamentoProcessoComponent
+                path: 'process-map/:id',
+                component: ProcessMapComponent
             },
             {
                 path: '',

@@ -1,8 +1,4 @@
-import { AtividadeComponent } from "./atividade/atividade.component";
-import { MapeamentoProcessoComponent } from "./mapeamento-processo/mapeamento-processo.component";
-import { TarefaComponent } from "./tarefa/tarefa.component";
-import { DiagramComponent } from "./mapeamento-processo/diagram/diagram.component";
-import { ProcessoComponent } from "./processo/processo.component";
+import { ProcessComponent } from "./process/process.component";
 import { ProfabricComponentsModule } from "@profabric/angular-components";
 import { CommonModule } from "@angular/common";
 import { BrowserModule } from "@angular/platform-browser";
@@ -13,16 +9,16 @@ import { ToastrModule } from "ngx-toastr";
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { IgxButtonModule, IgxDialogModule, IgxIconModule, IgxInputGroupModule, IgxRippleModule, IgxSelectModule, IgxTreeModule } from "igniteui-angular";
 import { NgModule } from "@angular/core";
-import { ArvoreProcessosModule } from "@components/arvore-processos/arvore-processos.module";
 import { MenuItemModule } from "@components/menu-item/menu-item.module";
+import { ProcessMapComponent } from "./process-map/process-map.component";
+import { DiagramComponent } from "./process-map/diagram/diagram.component";
+import { ProcessTreeModule } from "@components/process-tree/process-map.module";
 
 @NgModule({
     declarations: [
-      AtividadeComponent,
-      MapeamentoProcessoComponent,
-      TarefaComponent,
+      ProcessMapComponent,
       DiagramComponent,
-      ProcessoComponent
+      ProcessComponent
     ],
     imports: [
       ProfabricComponentsModule,
@@ -44,7 +40,7 @@ import { MenuItemModule } from "@components/menu-item/menu-item.module";
       IgxDialogModule,
       IgxInputGroupModule,
       IgxSelectModule,
-      ArvoreProcessosModule,
+      ProcessTreeModule,
       MenuItemModule
     ],
     providers: [

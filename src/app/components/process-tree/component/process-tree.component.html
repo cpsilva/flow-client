@@ -21,34 +21,34 @@
             </div>
             <div class="actions" fxLayoutAlign="space-between" *ngIf="data.Id === selectedNodeId">
                 <button igxIconButton="outlined" igxRipple class="large">
-                    <igx-icon fontSet="material" [igxTooltipTarget]="addProcessoTooltip">check</igx-icon>
-                    <div class="addProcessoTooltip" #addProcessoTooltip="tooltip" igxTooltip>
-                        <div class="addProcessoTooltipContent">
-                           <span>Adicionar sub-processo</span>
+                    <igx-icon fontSet="material" [igxTooltipTarget]="addProcessTooltip">check</igx-icon>
+                    <div class="addProcessTooltip" #addProcessTooltip="tooltip" igxTooltip>
+                        <div class="addProcessTooltipContent">
+                           <span>Add sub-process</span>
                         </div>
                     </div>
                 </button>
                 <button igxIconButton="outlined" igxRipple class="large" (click)="editform.open()">
-                    <igx-icon fontSet="material" [igxTooltipTarget]="editProcessoTooltip">edit</igx-icon>
-                    <div class="editProcessoTooltip" #editProcessoTooltip="tooltip" igxTooltip>
-                        <div class="editProcessoTooltipContent">
-                           <span>Editar</span>
+                    <igx-icon fontSet="material" [igxTooltipTarget]="editProcessTooltip">edit</igx-icon>
+                    <div class="editProcessTooltip" #editProcessTooltip="tooltip" igxTooltip>
+                        <div class="editProcessTooltipContent">
+                           <span>Edit</span>
                         </div>
                     </div>
                 </button>
-                <button igxIconButton="outlined" igxRipple class="large" (click)="abrirMapeamento(data.Id)">
-                    <igx-icon fontSet="material" [igxTooltipTarget]="mapProcessoTooltip">open_with</igx-icon>
-                    <div class="mapProcessoTooltip" #mapProcessoTooltip="tooltip" igxTooltip>
-                        <div class="mapProcessoTooltipContent">
-                           <span>Mapear processo</span>
+                <button igxIconButton="outlined" igxRipple class="large" (click)="openProcessMap(data.Id)">
+                    <igx-icon fontSet="material" [igxTooltipTarget]="mapProcessTooltip">open_with</igx-icon>
+                    <div class="mapProcessTooltip" #mapProcessTooltip="tooltip" igxTooltip>
+                        <div class="mapProcessTooltipContent">
+                           <span>Map process</span>
                         </div>
                     </div>
                 </button>
-                <button igxIconButton="outlined" igxRipple class="large" (click)="abrirRemoverDialog(data)">
-                    <igx-icon fontSet="material" [igxTooltipTarget]="removerProcessoTooltip">delete</igx-icon>
-                    <div class="removerProcessoTooltip" #removerProcessoTooltip="tooltip" igxTooltip>
-                        <div class="removerProcessoTooltipContent">
-                           <span>Remover</span>
+                <button igxIconButton="outlined" igxRipple class="large" (click)="showRemoveDialog(data)">
+                    <igx-icon fontSet="material" [igxTooltipTarget]="removeProcessTooltip">delete</igx-icon>
+                    <div class="removeProcessTooltip" #removeProcessTooltip="tooltip" igxTooltip>
+                        <div class="removeProcessTooltipContent">
+                           <span>Remove</span>
                         </div>
                     </div>
                 </button>
@@ -59,19 +59,19 @@
 <igx-dialog #editform [closeOnOutsideSelect]="true">
     <igx-dialog-title>
         <div class="dialog-container">
-            <div class="dialog-title">Editar processo</div>
+            <div class="dialog-title">Edit process</div>
         </div>
     </igx-dialog-title>
 
-    <form class="editProcessoForm">
+    <form class="editProcessForm">
         <igx-input-group>
-            <label igxLabel for="nomeProcesso">Nome do processo</label>
-            <input igxInput id="nomeProcesso" type="text" />
+            <label igxLabel for="nomeProcess">Process name</label>
+            <input igxInput id="nomeProcess" type="text" />
         </igx-input-group>
         <igx-select>
-            <label igxLabel>Possui processo pai?</label>
+            <label igxLabel>Have origin process?</label>
             <igx-suffix *ngIf="selected">
-                <igx-icon (click)="limparSelecao($event)">clear</igx-icon>
+                <igx-icon (click)="cleanSelecion($event)">clear</igx-icon>
             </igx-suffix>
             <igx-select-item *ngFor="let item of data" [value]="item">
                 {{item.Name}}
@@ -79,26 +79,26 @@
         </igx-select>
         <br />
         <div class="button-custom" fxLayout="row" fxLayoutAlign="space-between center">
-            <span igxButton="contained" igxButtonColor="white" igxButtonBackground="#345779" igxRipple="white" (click)="anexarArquivo()">
+            <span igxButton="contained" igxButtonColor="white" igxButtonBackground="#345779" igxRipple="white" (click)="uploadFile()">
                 <igx-prefix>
                     <igx-icon fontSet="material" [style.color]="'white'">upload</igx-icon>
                 </igx-prefix>
-                Anexar arquivo
+                Attach file
             </span>
-            <span *ngIf="uploadRealizado">Upload realizado com sucesso!</span>
+            <span *ngIf="isUploadCompleted">Upload completed!</span>
         </div>
     </form>
 
     <div class="buttons-custom" igxDialogActions>
-        <button igxButton="oulined" (click)="editform.close()">Cancelar</button>
+        <button igxButton="oulined" (click)="editform.close()">Cancel</button>
         <span style="margin-left: 1%;" igxButton="contained" igxButtonColor="white" igxButtonBackground="#345779" igxRipple="white" (click)="editform.close()">
-            Atualizar
+            Update
         </span>
     </div>
 </igx-dialog>
-<igx-dialog #removerDialog title="Confirmação"
+<igx-dialog #removeDialog title="Are you sure?"
     leftButtonLabel="Cancel"
-    (leftButtonSelect)="removerDialog.close()"
+    (leftButtonSelect)="removeDialog.close()"
     rightButtonLabel="OK"
     (rightButtonSelect)="onDialogOKSelected($event)"
     message={{removeMessage}}>
