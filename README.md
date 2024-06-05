@@ -2,6 +2,9 @@
 
 Description coming soon!
 
+## Code Analysis
+[![CodeFactor](https://www.codefactor.io/repository/github/cpsilva/flow-client/badge)](https://www.codefactor.io/repository/github/cpsilva/flow-client)
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
